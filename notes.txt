@@ -228,10 +228,126 @@ Training deep networks: How to choose appropriate loss functions and optimizatio
 Testing: Evaluating the performance of deep networks on unseen data to ensure they generalize well.
 In summary, deep neural networks, by stacking multiple layers of hidden units, are capable of modeling much more complex functions than shallow networks. They have been particularly successful in applications that involve large datasets and intricate patterns, such as image and text recognition. Despite the challenges in training them, deep networks have become the standard for many cutting-edge machine learning applications due to their superior ability to generalize and fit complex data.
 
-***** CHAPTER 5 *****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ***** CHAPTER 6 *****
 
+Key Concepts:
+1. Math Overview
+2. Gradient Descent Algorithm
+3. Linear Regression Example
+4. Gabor Model Example
+5. Stochastic Gradient Descent (SGD)
+6. Momentum
+7. Adam Optimizer
+
+Gradient Descent Algorithm:
+- Step 1: Compute derivatives (slopes) with respect to parameters.
+- Step 2: Update parameters according to the rule: α = step size (learning rate).
+
+Convex and Non-Convex Problems:
+- Test for convexity: The second derivative is positive everywhere.
+- In higher dimensions: The determinant of the Hessian matrix (2nd derivative matrix) is positive.
+
+Gabor Model:
+- Gradient descent finds the global minimum if the starting point is in the right “valley.”
+- Otherwise, it may descend to a local minimum or get stuck near a saddle point.
+
+Stochastic Gradient Descent (SGD):
+- Computes the gradient based on a subset of data points (mini-batch).
+- Uses the dataset without replacement, one pass through the data is called an epoch.
+- Benefits: Escapes local minima, uses all data equally, is computationally efficient.
+- Disadvantages: Doesn't converge traditionally, needs a learning rate schedule.
+
+Momentum:
+- Weighted sum of the current gradient and the previous gradient.
+- Nesterov accelerated momentum: Predict the next step, then measure the gradient.
+
+Adam Optimizer (Adaptive Moment Estimation):
+- Combines the benefits of momentum with adaptive learning rates.
+- Measures mean and pointwise squared gradients.
+- Adjusts parameters accordingly.
+
+Key Hyperparameters:
+- Choice of learning algorithm
+- Learning rate
+- Momentum
+
+
+
+
+
+
+
+
+
+
+
 ***** CHAPTER 7 *****
+
+Key Concepts:
+1. Multiclass classification problem (e.g., music genre classification).
+2. Loss function: Measures how well a model maps inputs to outputs (smaller is better).
+3. Problem 1: Computing gradients efficiently for neural networks.
+   - The backpropagation algorithm is used for this purpose.
+   - Derivatives need to be computed for every parameter, point in the batch, and iteration of SGD.
+4. Problem 2: Initialization of parameters before running SGD.
+
+Backpropagation:
+1. Forward Pass:
+   - Activations are multiplied by weights in the previous layer (e.g., ReLU output).
+   - We need to know how activations affect the loss.
+2. Backward Pass:
+   - Calculate how a small change in a weight or bias modifies the loss.
+   - Chain rule is applied to compute these gradients.
+
+Toy Model:
+- A simplified function using scalars (e.g., sin, exp, cos).
+- Forward and backward passes are used to calculate gradients for composed functions.
+- Derivatives of these intermediate quantities are computed in reverse order using the chain rule.
+
+Matrix Calculus:
+- Scalar function of vector and matrix derivatives.
+- Comparison of scalar and matrix derivatives, as well as their calculation methods.
+
+Algorithmic Differentiation:
+- Modern deep learning frameworks like PyTorch compute derivatives automatically using algorithmic differentiation.
+- Each component (e.g., ReLU, linear functions) knows how to compute its own derivative.
+- The framework computes the chain of derivatives through the network.
+
+PyTorch Example:
+- Define a neural network and initialize parameters using He initialization.
+- Choose a loss function and optimization algorithm (e.g., Adam).
+- Set learning rate and learning rate schedule.
+- Train the model for 100 batches using random data.
+
+Backpropagation Pros and Cons:
+- Pros: Extremely efficient, requires only matrix multiplication and ReLU functions.
+- Cons: Memory-intensive, sequential processing, handling multiple batches in parallel can be challenging.
+
+Summary:
+- Backpropagation is a powerful and efficient algorithm but can be computationally expensive in terms of memory and resources.
+- Algorithmic differentiation enables automatic gradient computation, simplifying the training process in deep learning frameworks.
+
 
 ***** CHAPTER 8 *****
