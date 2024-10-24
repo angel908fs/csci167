@@ -350,4 +350,121 @@ Summary:
 - Algorithmic differentiation enables automatic gradient computation, simplifying the training process in deep learning frameworks.
 
 
+***** CHAPTER 7b *****
+
+Initialization in Neural Networks:
+
+1. **Need for Initialization**
+   - Proper initialization is crucial in deep learning to avoid issues like exploding or vanishing gradients during training. Without appropriate initialization, backpropagation might fail to update weights effectively.
+
+2. **He Initialization**
+   - Designed for layers using ReLU (Rectified Linear Unit) activation functions.
+   - Goal: Maintain variance of hidden unit activations across layers during both forward and backward passes.
+   - In the **forward pass**, the variance of activations in layer (k+1) should match the variance of activations in layer (k).
+   - In the **backward pass**, the variance of gradients at layer (k) should be equal to the variance of the gradients in layer (k+1).
+   - Formula: Weights initialized with a normal distribution, mean 0, and variance determined by the number of units in each layer.
+
+3. **Exploding and Vanishing Gradients**
+   - **Exploding Gradients**: If the variance of the weights is too large, the gradients increase exponentially as they move backward through the network, causing instability in training.
+   - **Vanishing Gradients**: If the variance of the weights is too small, the gradients shrink as they propagate backward, making updates too small to learn effectively.
+
+4. **Variance Calculations**
+   - Variance of pre-activations \( f' \) can be expressed in terms of the activations \( h \) from the previous layer, or in terms of the pre-activations from the previous layer.
+   - The aim is to keep the variance the same between layers, which is critical for stable network training.
+
+5. **Biases and Weights Initialization**
+   - Biases are typically set to 0.
+   - Weights are normally distributed with:
+     - Mean of 0.
+     - Variance: \( \sigma^2 \), controlled to maintain balanced activations across layers.
+
+6. **Expectation and Probability**
+   - **Expectation**: The average value of a function \( g(x) \), given a probability distribution of \( x \).
+   - You can approximate the expectation by sampling values of \( x \), calculating \( g(x) \), and taking the average.
+   - Rules for manipulating expectations:
+     - Rule 1: \( E[aX] = aE[X] \) for constant \( a \).
+     - Rule 2: \( E[X + Y] = E[X] + E[Y] \) if \( X \) and \( Y \) are independent.
+     - Rule 3: For two independent random variables, the expectation of their product equals the product of their expectations.
+
+7. **Exploding and Vanishing Gradients (Revisited)**
+   - Both issues can arise depending on the initialization of weights and how they propagate through layers, influencing both activations and gradients.
+
+8. **Key Formula for He Initialization**
+   - To avoid the exploding/vanishing gradient problems:
+     - Weight variance should be inversely proportional to the number of units in the previous layer (for ReLU, variance = \( \frac{2}{n} \) where \( n \) is the number of units).
+     - Helps to ensure that the gradients and activations neither blow up nor disappear as they move through the layers of the network.
+
+Summary:
+   - Initialization plays a crucial role in training deep networks effectively.
+   - He initialization, specifically for ReLU activations, addresses both exploding and vanishing gradient issues by controlling the variance of weights across layers.
+   - Expectations and variance manipulation underpin many of the initialization techniques used to stabilize neural network training.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ***** CHAPTER 8 *****
+
+Performance in Deep Learning:
+
+1. **Measuring Performance**
+   - Performance measurement relies on datasets like MNIST (a 1D dataset with 40 inputs, 10 outputs, and 4000 training examples).
+   - The model has two hidden layers, with 100 hidden units each.
+   - SGD (Stochastic Gradient Descent) is used with a batch size of 100 and learning rate of 0.1, for 6000 steps.
+
+2. **Noise, Bias, and Variance**
+   - **Noise**: Inherent uncertainty in the data, caused by unobserved variables or mislabeled data.
+   - **Bias**: Systematic deviation from the true model due to model limitations.
+   - **Variance**: Uncertainty in the model due to the specific training set used.
+   - The balance between bias and variance is critical to model performance.
+
+3. **Reducing Variance**
+   - Variance can be reduced by adding more training samples.
+   - Overfitting leads to high variance, where the model fits the training data too closely but performs poorly on new data.
+
+4. **Reducing Bias**
+   - Reducing bias means improving the model's fit to the underlying true function, often by increasing model complexity.
+   - However, increasing complexity can also increase variance, leading to the **bias-variance trade-off**.
+
+5. **Bias-Variance Trade-off**
+   - Models need to balance bias (underfitting) and variance (overfitting).
+   - Over-parameterized models (models with more parameters than necessary) can sometimes result in better generalization, a phenomenon known as **double descent**.
+
+6. **Double Descent**
+   - Classical learning theory suggests performance improves as model complexity increases, but only up to a certain point (under-parameterized regime).
+   - In the **modern or over-parameterized regime**, as complexity continues to grow, performance can improve again after an initial dip (double descent).
+
+7. **Curse of Dimensionality**
+   - In high-dimensional spaces, the number of data points becomes insufficient to cover the space effectively, leading to issues with generalization.
+   - High-dimensional data has unique properties, such as points being mostly "at right angles" and most of the volume being in the outer edges (the "peel" of a sphere).
+
+8. **Weird Properties of High-Dimensional Space**
+   - As dimensions increase, strange properties emerge:
+     - Two randomly sampled points are likely to be at right angles.
+     - Distance from the origin remains roughly constant.
+     - Most of the volume in a high-dimensional object like a sphere is concentrated in the surface, not the interior.
+
+9. **Choosing Hyperparameters**
+   - Hyperparameters (such as model capacity, learning rate, and algorithm choice) are crucial for model performance.
+   - Typically, models are trained on a **training set**, and hyperparameters are tuned using a **validation set**.
+   - After hyperparameter tuning, the model is tested once on a **test set** for final performance evaluation.
+
+10. **Key Challenges in High-Dimensional Spaces**
+    - Quantization in high-dimensional data leads to sparse coverage of the space, exacerbating the curse of dimensionality.
+    - As the dimension increases, it becomes harder to represent data effectively due to the exponential increase in required bins or samples.
+
+Summary:
+- Deep learning performance is influenced by how well a model handles noise, bias, and variance.
+- The trade-off between bias and variance, the curse of dimensionality, and proper hyperparameter tuning are critical to optimizing performance.
+- Double descent shows that over-parameterization can sometimes lead to better generalization, contrary to classical expectations.
