@@ -1,0 +1,17 @@
+10.3
+
+In this notebook we manually create a 2D convolution operation and then we compare it against pytorch's convolution operation
+The conv_pytorch function performs a 2D convolution using pytorch
+The conv_numpy_1 function performs a 2D convolution manually with just one channel in and one channel out
+We then test out convolution implementation against pytorch's
+conv_numpy_2 is similar to conv_numpy_1 but adds strides which allow us to adjust the input size
+conv_numpy_3 is similar to conv_numpy_2 but with multiple input and output channels
+conv_numpy_4 performs a manual 2d convolution on multiple images
+
+10.4
+In this notebook we go over the upscaling and downscaling operations on images
+subsampling reduces an image by choosing one value within a nxn mask and creating a new image that's smaller than the original one
+maxpooling is a subsampling technique that chooses the max value within the nxn mask to create the new image
+meanpooling is similar to maxpooling, but uses the mean of all the values within the mask to come up with the new image
+duplicating is an upscaling method that takes a value from an image an expands it to create a mask of copies of the same of size nxn
+maxunpooling uses the max of a set of values to create the upscaled mask
